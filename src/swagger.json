@@ -1,0 +1,167 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Desafio Documentando com Swagger",
+    "description": "Documentação da API desenvolvida no desafio de introduçao ao SOLID.",
+    "version": "1.0.0",
+    "contact": {
+      "email": "ferbs89@gmail.com"
+    }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Create user",
+        "description": "Create a new user.",
+        "requestBody": {
+          "required": true,
+          "description": "Required fields.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Full Name",
+                  "email": "email@email.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "a5cfa954-0d32-48ab-9031-9ad8fcc9b282"
+                    },
+                    "admin": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Full Name"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "email@email.com"
+                    },
+                    "created_at": {
+                      "type": "date",
+                      "example": "2022-02-24T01:22:35.402Z"
+                    },
+                    "updated_at": {
+                      "type": "date",
+                      "example": "2022-02-24T01:22:35.402Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User e-mail already exists.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "User e-mail already exists."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get user",
+        "description": "Get user profile.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "description": "User ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "a5cfa954-0d32-48ab-9031-9ad8fcc9b282"
+                    },
+                    "admin": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Full Name"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "email@email.com"
+                    },
+                    "created_at": {
+                      "type": "date",
+                      "example": "2022-02-24T01:22:35.402Z"
+                    },
+                    "updated_at": {
+                      "type": "date",
+                      "example": "2022-02-24T01:22:35.402Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {                    
+                    "error": {
+                      "type": "string",
+                      "example": "User not found."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
